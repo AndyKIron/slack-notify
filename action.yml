@@ -1,0 +1,20 @@
+name: 'Slack Notify'
+description: 'This action sending Slack notifications'
+
+inputs:
+  chanel:
+    description: "Target slack channel"
+    required: true
+  icon:
+    description: "Message icon"
+    required: true
+  message:
+    description: "Message text"
+    required: true
+  slack_webhook:
+    description: "Slack webhook (use secret)"
+    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
