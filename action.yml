@@ -5,7 +5,7 @@ inputs:
   channel:
     description: "Target slack channel"
     required: true
-  user:
+  username:
     description: "Sender"
     required: true
   icon:

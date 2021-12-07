@@ -7,21 +7,19 @@ validate_args() {
     echo "Error: Channel is a required argument."
     exit 1
   fi
-  user:
-    if [ -z "${INPUT_USER}" ]
-    then
-      echo "Error: User is required."
-      exit 1
-    fi
 
-  icon:
-    if [ -z "${INPUT_ICON}" ]
-    then
-      echo "Error: Icon is required."
-      exit 1
-    fi
+  if [ -z "${INPUT_USERNAME}" ]
+  then
+    echo "Error: User is required."
+    exit 1
+  fi
 
-  message:
+  if [ -z "${INPUT_ICON}" ]
+  then
+    echo "Error: Icon is required."
+    exit 1
+  fi
+
   if [ -z "${INPUT_MESSAGE}" ]
   then
     echo "Error: Message is required."
@@ -37,7 +35,7 @@ validate_args() {
 
 send_notification() {
 
-  DATA="{'text':'<!channel> ${INPUT_MESSAGE}', 'channel': '${INPUT_CHANNEL}', 'username': 'FusionUI-CI', 'icon_emoji': '${INPUT_ICON}'}"
+  DATA="{'text':'<!channel> ${INPUT_MESSAGE}', 'channel': '${INPUT_CHANNEL}', 'username': '${INPUT_USERNAME}', 'icon_emoji': '${INPUT_ICON}'}"
 
   echo $DATA
 
