@@ -34,10 +34,11 @@ validate_args() {
 }
 
 send_notification() {
-  DATA="{'text':'<!channel> ${INPUT_MESSAGE}', 'channel': '${INPUT_CHANNEL}', 'username': '${INPUT_USERNAME}', 'icon_url': '${icon_url}'}"
-#  echo $DATA
+  attachments="[{\"color\": \"good\", \"text\": \"<!channel> ${INPUT_MESSAGE}\"}]"
+  DATA="{'channel': '${INPUT_CHANNEL}', 'username': '${INPUT_USERNAME}', 'icon_url': '${icon_url}', 'attachments': ${attachments}"
+  echo $DATA
 
-  echo "Send: $(curl -X POST -H 'Content-type: application/json' --data "$DATA" "${INPUT_SLACK_WEBHOOK}")"
+#  echo "Send: $(curl -X POST -H 'Content-type: application/json' --data "$DATA" "${INPUT_SLACK_WEBHOOK}")"
 }
 
 main() {
