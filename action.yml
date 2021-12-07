@@ -2,7 +2,7 @@ name: 'Slack Notify'
 description: 'This action sending Slack notifications'
 
 inputs:
-  chanel:
+  channel:
     description: "Target slack channel"
     required: true
   icon:

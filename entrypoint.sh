@@ -4,7 +4,7 @@ set -e
 validate_args() {
   if [ -z "${INPUT_CHANNEL}" ]
   then
-    echo "Error: Repo is a required argument."
+    echo "Error: Channel is a required argument."
     exit 1
   else
     echo "OOOO ${INPUT_CHANNEL}"
