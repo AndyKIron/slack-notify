@@ -34,12 +34,10 @@ validate_args() {
 }
 
 send_notification() {
-
   DATA="{'text':'<!channel> ${INPUT_MESSAGE}', 'channel': '${INPUT_CHANNEL}', 'username': '${INPUT_USERNAME}', 'icon_emoji': '${INPUT_ICON}'}"
-
   echo $DATA
 
-#  echo $(curl -X POST -H 'Content-type: application/json' --data "$DATA" "${INPUT_SLACK_WEBHOOK}")
+  echo $(curl -X POST -H 'Content-type: application/json' --data "$DATA" "${INPUT_SLACK_WEBHOOK}")
 }
 
 main() {
