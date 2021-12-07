@@ -60,6 +60,6 @@ validate_args() {
 main() {
   validate_args
 
-  trigger_workflow
+#  trigger_workflow
 }
 main
