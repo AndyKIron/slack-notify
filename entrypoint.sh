@@ -6,60 +6,47 @@ validate_args() {
   then
     echo "Error: Channel is a required argument."
     exit 1
-  else
-    echo "OOOO ${INPUT_CHANNEL}"
   fi
-#
-#  if [ -z "${INPUT_GITHUB_TOKEN}" ]
-#  then
-#    echo "Error: Github token is required. You can head over settings and"
-#    echo "under developer, you can create a personal access tokens. The"
-#    echo "token requires repo access."
-#    exit 1
-#  fi
-#
-#  if [ -z "${INPUT_WORKFLOW_FILE_NAME}" ]
-#  then
-#    echo "Error: Workflow File Name is required"
-#    exit 1
-#  fi
-#
-#  if [ -z "${INPUT_JOB_NAME_SUBSTRING}" ]
-#  then
-#    echo "Error: Job name substring is a required argument."
-#    exit 1
-#  fi
-#
-#  inputs=$(echo '{}' | jq)
-#  if [ "${INPUT_INPUTS}" ]
-#  then
-#    inputs=$(echo "${INPUT_INPUTS}" | jq)
-#  fi
-#
-#  ref="main"
-#  if [ "$INPUT_REF" ]
-#  then
-#    ref="${INPUT_REF}"
-#  fi
+  user:
+    if [ -z "${INPUT_USER}" ]
+    then
+      echo "Error: User is required."
+      exit 1
+    fi
+
+  icon:
+    if [ -z "${INPUT_ICON}" ]
+    then
+      echo "Error: Icon is required."
+      exit 1
+    fi
+
+  message:
+  if [ -z "${INPUT_MESSAGE}" ]
+  then
+    echo "Error: Message is required."
+    exit 1
+  fi
+
+  if [ -z "${INPUT_SLACK_WEBHOOK}" ]
+  then
+    echo "Error: Slack webhook is required."
+    exit 1
+  fi
 }
 
-#trigger_workflow() {
-#  echo "${GITHUB_API_URL}/repos/${INPUT_OWNER}/${INPUT_REPO}/actions/workflows/${INPUT_WORKFLOW_FILE_NAME}/dispatches"
-#  echo "{\"ref\":\"${ref}\",\"inputs\":${inputs}}"
-#
-#  trigger_workflow=$(curl --fail -X POST "${GITHUB_API_URL}/repos/${INPUT_OWNER}/${INPUT_REPO}/actions/workflows/${INPUT_WORKFLOW_FILE_NAME}/dispatches" \
-#    -H "Accept: application/vnd.github.v3+json" \
-#    -H "Content-Type: application/json" \
-#    -H "Authorization: Bearer ${INPUT_GITHUB_TOKEN}" \
-#    --data "{\"ref\":\"${ref}\",\"inputs\":${inputs}}")
-#
-#  echo "Sleeping for ${wait_interval} seconds"
-#  sleep $wait_interval
-#}
+send_notification() {
+
+  DATA="{'text':'<!channel> ${INPUT_MESSAGE}', 'channel': '${INPUT_CHANNEL}', 'username': 'FusionUI-CI', 'icon_emoji': '${INPUT_ICON}'}"
+
+  echo $DATA
+
+#  echo $(curl -X POST -H 'Content-type: application/json' --data "$DATA" "${INPUT_SLACK_WEBHOOK}")
+}
 
 main() {
   validate_args
-
-#  trigger_workflow
+  send_notification
 }
+
 main
