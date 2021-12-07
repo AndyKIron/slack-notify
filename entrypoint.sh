@@ -14,10 +14,10 @@ validate_args() {
     exit 1
   fi
 
-  if [ -z "${INPUT_ICON}" ]
+  icon_url="https://avatars.githubusercontent.com/t/5433436?s=32&v=4"
+  if [ -n "${INPUT_ICON}" ]
   then
-    echo "Error: Icon is required."
-    exit 1
+    icon_url= ${INPUT_ICON}
   fi
 
   if [ -z "${INPUT_MESSAGE}" ]
@@ -34,7 +34,7 @@ validate_args() {
 }
 
 send_notification() {
-  DATA="{'text':'<!channel> ${INPUT_MESSAGE}', 'channel': '${INPUT_CHANNEL}', 'username': '${INPUT_USERNAME}', 'icon_emoji': '${INPUT_ICON}'}"
+  DATA="{'text':'<!channel> ${INPUT_MESSAGE}', 'channel': '${INPUT_CHANNEL}', 'username': '${INPUT_USERNAME}', 'icon_url': '${icon_url}'}"
   echo $DATA
 
   echo $(curl -X POST -H 'Content-type: application/json' --data "$DATA" "${INPUT_SLACK_WEBHOOK}")
