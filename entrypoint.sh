@@ -17,7 +17,19 @@ validate_args() {
   icon_url="https://avatars.githubusercontent.com/t/5433436?s=32&v=4"
   if [ -n "${INPUT_ICON}" ]
   then
-    icon_url= ${INPUT_ICON}
+    icon_url=${INPUT_ICON}
+  fi
+
+  icon_emoji=""
+  if [ -n "${INPUT_ICON_EMOJI}" ]
+  then
+    icon_emoji=${INPUT_ICON_EMOJI}
+  fi
+
+  status="good"
+  if [ -n "${INPUT_STATUS}" ]
+  then
+    status=${INPUT_STATUS}
   fi
 
   if [ -z "${INPUT_MESSAGE}" ]
@@ -34,11 +46,15 @@ validate_args() {
 }
 
 send_notification() {
-  attachments="[{\"color\": \"good\", \"text\": \"<!channel> ${INPUT_MESSAGE}\"}]"
-  DATA="{'channel': '${INPUT_CHANNEL}', 'username': '${INPUT_USERNAME}', 'icon_url': '${icon_url}', 'attachments': ${attachments}"
-  echo $DATA
+  attachments="[{'color': '${status}', 'text': '<!channel>${icon_emoji} ${INPUT_MESSAGE}'}]"
+  DATA="{ \
+         'channel': '${INPUT_CHANNEL}', \
+         'username': '${INPUT_USERNAME}', \
+         'icon_url': '${icon_url}', \
+         'attachments': ${attachments}
+         }"
 
-#  echo "Send: $(curl -X POST -H 'Content-type: application/json' --data "$DATA" "${INPUT_SLACK_WEBHOOK}")"
+  echo "Send: $(curl -X POST -H 'Content-type: application/json' --data "$DATA" "${INPUT_SLACK_WEBHOOK}")"
 }
 
 main() {

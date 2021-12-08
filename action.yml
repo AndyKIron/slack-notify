@@ -8,16 +8,21 @@ inputs:
   username:
     description: "Sender"
     required: true
-  icon:
-    description: "Message icon"
-    required: true
+  icon_url:
+    description: "Message icon URL"
+    required: false
+  icon_emoji:
+    description: "Message icon emoji"
+    required: false
+  status:
+    description: "Message status. good (green), warning (yellow), danger (red), or any hex color code (eg. #439FE0)"
+    required: false
   message:
     description: "Message text"
     required: true
   slack_webhook:
     description: "Slack webhook (use secret)"
     required: true
-
 runs:
   using: 'docker'
   image: 'Dockerfile'
