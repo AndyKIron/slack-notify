@@ -1,6 +1,9 @@
 name: 'Slack Notify'
 description: 'This action sending Slack notifications'
-
+author: AndyKIron
+branding:
+  icon: bell
+  color: blue
 inputs:
   channel:
     description: "Target slack channel"
