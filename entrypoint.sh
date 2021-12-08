@@ -46,7 +46,7 @@ validate_args() {
 }
 
 send_notification() {
-  attachments="[{'color': '${status}', 'text': '<!channel>${icon_emoji} ${INPUT_MESSAGE}'}]"
+  attachments="[{'color': '${status}', 'text': '${icon_emoji} ${INPUT_MESSAGE}'}]"
   DATA="{ \
          'channel': '${INPUT_CHANNEL}', \
          'username': '${INPUT_USERNAME}', \
