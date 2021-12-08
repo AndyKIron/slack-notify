@@ -54,6 +54,8 @@ send_notification() {
          'attachments': ${attachments}
          }"
 
+  echo $DATA
+
   echo "Send: $(curl -X POST -H 'Content-type: application/json' --data "$DATA" "${INPUT_SLACK_WEBHOOK}")"
 }
 
